@@ -21,8 +21,10 @@ This project explores line-oriented parsing, string handling, dependency graphs,
 ## How it works
 
 ```text
-makefile ──> parser ──> variables + rules ──> build (depth-first) ──> fork ─> execv("/bin/sh", "-c", recipe)
-                                                                        └──> waitpid ─> next recipe or stop
+makefile ──> parser ──> variables + rules ──> build (depth-first)
+                                                     │
+                                                     ▼
+                    waitpid <── execv("/bin/sh -c") <── fork
 ```
 
 ### Parsing
